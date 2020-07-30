@@ -1,8 +1,6 @@
 package org.launchcode.codingevents.models;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 /**
@@ -24,16 +22,54 @@ public class Event {
     @Email(message = "Invalid email. Try again.")
     private String contactEmail;
 
-    public Event(String name, String description, String contactEmail) {
+    @NotBlank(message ="place can not be blank.")
+    @NotNull
+    private String eventPlace;
+
+    @NotNull
+    private boolean registered;
+
+    @Min(1)
+    private int numberOfParticipant;
+
+
+    public Event(String name, String description, String contactEmail,String eventPlace,boolean registered,int numberOfParticipant) {
         this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
+        this.eventPlace=eventPlace;
+        this.registered=registered;
+        this.numberOfParticipant=numberOfParticipant;
     }
 
     public Event() {
         this.id = nextId;
         nextId++;
+    }
+
+    public boolean isRegistered() {
+        return registered;
+    }
+
+    public void setRegistered(boolean registered) {
+        this.registered = registered;
+    }
+
+    public String getEventPlace() {
+        return eventPlace;
+    }
+
+    public void setEventPlace(String eventPlace) {
+        this.eventPlace = eventPlace;
+    }
+
+    public int getNumberOfParticipant() {
+        return numberOfParticipant;
+    }
+
+    public void setNumberOfParticipant(int numberOfParticipant) {
+        this.numberOfParticipant = numberOfParticipant;
     }
 
     public String getName() {
