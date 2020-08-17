@@ -1,17 +1,24 @@
 package org.launchcode.codingevents.models;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 /**
  * Created by Chris Bay
  */
+
+
+
+@Entity
 public class Event {
 
+    @Id
+    @GeneratedValue
     private int id;
-    private static int nextId = 1;
+
 
     @NotBlank(message = "Name is required")
     @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
@@ -24,16 +31,65 @@ public class Event {
     @Email(message = "Invalid email. Try again.")
     private String contactEmail;
 
-    public Event(String name, String description, String contactEmail) {
-        this();
+    @NotBlank(message ="place can not be blank.")
+    @NotNull
+    private String eventPlace;
+
+    @NotNull
+    private boolean registered;
+
+    @Min(1)
+    private int numberOfParticipant;
+
+
+    private EventType type;
+
+
+    public Event(String name, String description, String contactEmail, String eventPlace, boolean registered, int numberOfParticipant, EventType type) {
+
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
+        this.eventPlace=eventPlace;
+        this.registered=registered;
+        this.numberOfParticipant=numberOfParticipant;
+        this.type=type;
     }
 
     public Event() {
-        this.id = nextId;
-        nextId++;
+
+    }
+
+    public void setType(EventType type) {
+        this.type = type;
+    }
+
+    public boolean isRegistered() {
+        return registered;
+    }
+
+    public EventType getType() {
+        return type;
+    }
+
+    public void setRegistered(boolean registered) {
+        this.registered = registered;
+    }
+
+    public String getEventPlace() {
+        return eventPlace;
+    }
+
+    public void setEventPlace(String eventPlace) {
+        this.eventPlace = eventPlace;
+    }
+
+    public int getNumberOfParticipant() {
+        return numberOfParticipant;
+    }
+
+    public void setNumberOfParticipant(int numberOfParticipant) {
+        this.numberOfParticipant = numberOfParticipant;
     }
 
     public String getName() {

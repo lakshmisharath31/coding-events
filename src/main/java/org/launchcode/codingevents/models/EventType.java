@@ -3,7 +3,7 @@ package org.launchcode.codingevents.models;
 
 
 
-public enum EvenType{
+public enum EventType {
 
         CONFERENCE("Conference"),
         MEETUP("Meetup"),
@@ -12,7 +12,7 @@ public enum EvenType{
 
         private final String displayName;
 
-    EvenType(String displayName) {
+    EventType(String displayName) {
         this.displayName = displayName;
     }
 
